@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Menu, Dropdown, Button } from "antd";
 import { DownOutlined } from "@ant-design/icons";
-import { PolygonLogo, BSCLogo, ETHLogo } from "./Logos"; //AvaxLogo
+import { PolygonLogo } from "./Logos"; //AvaxLogo
 import { useChain, useMoralis } from "react-moralis";
 
 const styles = {
@@ -21,11 +21,11 @@ const styles = {
 };
 
 const menuItems = [
-  {
-    key: "0x1",
-    value: "Ethereum",
-    icon: <ETHLogo />,
-  },
+  // {
+  //   key: "0x1",
+  //   value: "Ethereum",
+  //   icon: <ETHLogo />,
+  // },
   // {
   //   key: "0x539",
   //   value: "Local Chain",
@@ -51,21 +51,21 @@ const menuItems = [
   //   value: "Goerli Testnet",
   //   icon: <ETHLogo />,
   // },
-  {
-    key: "0x38",
-    value: "Binance",
-    icon: <BSCLogo />,
-  },
+  // {
+  //   key: "0x38",
+  //   value: "Binance",
+  //   icon: <BSCLogo />,
+  // },
   // {
   //   key: "0x61",
   //   value: "Smart Chain Testnet",
   //   icon: <BSCLogo />,
   // },
-  {
-    key: "0x89",
-    value: "Polygon",
-    icon: <PolygonLogo />,
-  },
+  // {
+  //   key: "0x89",
+  //   value: "Polygon",
+  //   icon: <PolygonLogo />,
+  // },
   {
     key: "0x13881",
     value: "Mumbai",

@@ -17,7 +17,7 @@ import Wallet from "components/Wallet";
 import { Layout, Tabs } from "antd";
 import NativeBalance from "components/NativeBalance";
 import "./style.css";
-import QuickStart from "components/QuickStart";
+// import QuickStart from "components/QuickStart";
 import MenuItems from "./components/MenuItems";
 import CreateNFT from "components/CreateNFT/createNFT";
 const { Header } = Layout;
@@ -103,13 +103,13 @@ const App = ({ isServerInfo }) => {
 
           <div style={styles.content}>
             <Switch>
-              <Route exact path="/quickstart">
-                <QuickStart isServerInfo={isServerInfo} />
+              <Route exact path="/nft">
+                <CreateNFT isServerInfo={isServerInfo} />
               </Route>
               <Route path="/wallet">
                 <Wallet />
               </Route>
-              <Route path="/nft">
+              <Route path="/">
                 <CreateNFT />
               </Route>
               <Route path="/1inch">

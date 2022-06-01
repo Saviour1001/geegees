@@ -12,7 +12,7 @@ import Address from "../Address/Address";
 import Blockie from "../Blockie";
 
 import ABI from "../../contracts/ABI.json";
-const smartContractAddress = "0x23b8bf53cb0dc8607b9b79f28cd5c1b5d7834cf2";
+const smartContractAddress = "0x32CCdC333a132BaA3a6467686f88dE934110c5a2";
 
 const styles = {
   title: {
@@ -60,25 +60,40 @@ function CreateNFT() {
   const { Moralis, account } = useMoralis();
   const contractProcessor = useWeb3ExecuteFunction();
 
-  const [nftName, setNftName] = useState("");
-  const [nftDescription, setNftDescription] = useState("");
+  const [nftName, setNftName] = useState("GeeGees");
+  const [nftDescription, setNftDescription] = useState("We are awesome!!");
+  const [personeTrait, setPersoneTrait] = useState("I am a Rockstar");
+  const [nftLink, setNftLink] = useState("me.link");
   const [isPending, setIsPending] = useState(0);
   // const [nftImage, setNftImage] = useState("");
 
   async function create() {
     // save image to IPFS
     setIsPending(1);
-    const nftImage = document.getElementById("nftImage").files[0];
-    const imageHash = await saveFile("nftImage", nftImage, {
-      saveIPFS: true,
-    }).then((res) => {
-      console.log(res);
-      return res;
-    });
+    // const nftImage = document.getElementById("nftImage").files[0];
+    // const imageHash = await saveFile("nftImage", nftImage, {
+    //   saveIPFS: true,
+    // }).then((res) => {
+    //   console.log(res);
+    //   return res;
+    // });
+    const imageHash =
+      "https://ipfs.moralis.io:2053/ipfs/QmQq8TA5YELN95bDGBjGxGedYwZPxbBwFrJrysJ6jxCZVt/1.png";
+
     const metadata = {
       name: nftName,
       description: nftDescription,
-      image: imageHash._ipfs,
+      image: imageHash,
+      attributes: [
+        {
+          trait_type: "link",
+          value: document.getElementById("urlLink").value,
+        },
+        {
+          trait_type: "username",
+          value: personeTrait,
+        },
+      ],
     };
     console.log(metadata);
     // create NFT
@@ -106,7 +121,7 @@ function CreateNFT() {
     setIsPending(0);
     setNftName("");
     setNftDescription("");
-    document.getElementById("nftImage").value = null;
+    // document.getElementById("nftImage").value = null;
     // const nft = await createNFT(metadataHash).then((res) => {
     //   console.log(res);
     //   return res;
@@ -129,29 +144,29 @@ function CreateNFT() {
           <div style={styles.textWrapper}>
             <Text strong>Create NFT</Text>
           </div>
-          <Input
-            size="large"
-            // prefix={<CreditCardOutlined />}
-            type="text"
-            placeholder="NFT Name"
-            value={nftName}
-            onChange={(e) => setNftName(e.target.value)}
-          />
+          <select bgcolor="black" color="blue" name="urlLink" id="urlLink">
+            <option color="blue" value="me.link">
+              me.link
+            </option>
+            <option value="wagmi.link">wagmi.link</option>
+            <option value="collector.link">collector.link</option>
+            <option value="geegees.link">geegees.link</option>
+          </select>
         </div>
         <div style={styles.select}>
           <div style={styles.textWrapper}>
-            <Text strong>NFT Description</Text>
+            <Text strong>Add in your personal trait</Text>
           </div>
           <Input
             size="large"
             // prefix={<CreditCardOutlined />}
             type="text"
-            placeholder="NFT Description"
-            value={nftDescription}
-            onChange={(e) => setNftDescription(e.target.value)}
+            placeholder="I am a rockstar"
+            value={personeTrait}
+            onChange={(e) => setPersoneTrait(e.target.value)}
           />
         </div>
-        <div style={styles.select}>
+        {/* <div style={styles.select}>
           <div style={styles.textWrapper}>
             <Text strong>Upload NFT</Text>
           </div>
@@ -162,7 +177,7 @@ function CreateNFT() {
             placeholder="NFT Upload Media"
             id="nftImage"
           />
-        </div>
+        </div> */}
         {/* <input type="file" placeholder="NFT Image" id="nftImage" /> */}
         {/* <button onClick={create}>Create NFT</button> */}
         {isPending === 0 ? (
